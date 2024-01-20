@@ -1,3 +1,4 @@
+using ResourceManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,6 +41,7 @@ namespace UnitsAndBuildings
             {
                 ((IUIResourceUpdater)this).AddObserver();
             }
+            InventoryCMS.Instance.ReckeckNearestStockpiles();
         }
 
         void IObserver.OnStorageChanged(ResourceManagement.Items resourceType, int quantity)

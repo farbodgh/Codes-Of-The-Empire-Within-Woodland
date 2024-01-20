@@ -17,6 +17,7 @@ namespace ResourceManagement
         Weapon
     }
 
+
     class InventoryCMS : MonoBehaviour, IUIResourceUpdater
     {
         public static InventoryCMS Instance { get; private set;}
@@ -31,6 +32,10 @@ namespace ResourceManagement
         private ResourceManagement.Items[] m_armoryItems = new ResourceManagement.Items[1] { ResourceManagement.Items.Weapon };
 
         private IUIResourcesObserver m_UIobser;
+
+        public List<Peasants.Peasant> Lumbers;
+        public List<Peasants.Peasant> Smiths;
+        public List<Peasants.Peasant> Bakers;
 
         void Awake()
         {
@@ -55,11 +60,11 @@ namespace ResourceManagement
             }
         }
 
-        //This method is used in order to register an appropriate observer(storage) for each peasant that needs to store resources
+        //This method is used in order to register an appropriate observer(storage) for each lumber that needs to store resources
         public void RegisterPeasantInAppropriateStorage(Peasants.Peasant peasant)
         {
-            Debug.Log($"RegisterPeasantInAppropriateStorage: peasant name : {peasant.name}, and peasant type : {peasant.GetType()}");
-            //Depend on the type of the peasant's occupation, we should register him in the appropriate storage
+            Debug.Log($"RegisterPeasantInAppropriateStorage: lumber name : {peasant.name}, and lumber type : {peasant.GetType()}");
+            //Depend on the type of the lumber's occupation, we should register him in the appropriate storage
             //peasants are subjects and storages are observers
             if (peasant.GetType() == typeof(Peasants.Baker))
             {
@@ -97,7 +102,7 @@ namespace ResourceManagement
             }
         }
 
-        //This method is used in order to find the closest storage to the occupation of the peasant
+        //This method is used in order to find the closest storage to the occupation of the lumber
         private GameObject FindClosestStorageForTheOccuption(List<GameObject> storages, Transform occupationLocation)
         {
             GameObject closestStorage = storages[0];
@@ -242,6 +247,30 @@ namespace ResourceManagement
             else if(destroyedStorage.GetComponent<UnitsAndBuildings.Armory>() != null)
             {
                 m_armories.Remove(destroyedStorage);
+            }
+        }
+        public void ReckeckNearestStockpiles()
+        {
+            foreach(var lumber in Lumbers)
+            {
+                RegisterPeasantInAppropriateStorage(lumber);
+                lumber.ChangeStatusToGoToNewStorage();
+            }
+        }
+        public void RecheckNearestGranaries()
+        {
+            foreach(var baker in Bakers)
+            {
+                RegisterPeasantInAppropriateStorage(baker);
+                baker.ChangeStatusToGoToNewStorage();
+            }
+        }
+        public void RecheckNearestArmories()
+        {
+            foreach(var smith in Smiths)
+            {
+                RegisterPeasantInAppropriateStorage(smith);
+                smith.ChangeStatusToGoToNewStorage();
             }
         }
     }

@@ -20,7 +20,7 @@ namespace Peasants
             occupation.GetComponent<UnitsAndBuildings.Building>().AssignWorker(gameObject);
             //Assign the closet storage at the time of build to the baker to store its good there,
             ResourceManagement.InventoryCMS.Instance.RegisterPeasantInAppropriateStorage(this);
-            
+            ResourceManagement.InventoryCMS.Instance.Bakers.Add(this);
         }
 
 

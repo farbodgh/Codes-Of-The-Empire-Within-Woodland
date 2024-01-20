@@ -31,6 +31,7 @@ namespace Peasants
             occupation.GetComponent<UnitsAndBuildings.Building>().AssignWorker(gameObject);
             // Assign the closest storage at the time of build to the lumberjack to store goods there
             ResourceManagement.InventoryCMS.Instance.RegisterPeasantInAppropriateStorage(this);
+            ResourceManagement.InventoryCMS.Instance.Lumbers.Add(this);
         }
 
         protected override void Update()

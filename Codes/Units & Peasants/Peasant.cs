@@ -129,6 +129,13 @@ namespace Peasants
             Destroy(gameObject);
         }
 
+        public void ChangeStatusToGoToNewStorage()
+        {
+            if (m_peasantState == PeasantState.StoringResources)
+            {
+                Move(m_storage.transform);
+            }
+        }
     }
 
 }

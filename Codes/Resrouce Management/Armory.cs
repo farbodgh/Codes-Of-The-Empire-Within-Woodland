@@ -39,6 +39,7 @@ namespace UnitsAndBuildings
             {
                 ((IUIResourceUpdater)this).AddObserver();
             }
+            InventoryCMS.Instance.RecheckNearestArmories();
         }
 
         void IObserver.OnStorageChanged(ResourceManagement.Items resourceType, int quantity)

@@ -31,6 +31,7 @@ namespace Peasants
             occupation.GetComponent<UnitsAndBuildings.Building>().AssignWorker(gameObject);
             // Assign the closest storage at the time of build to the smith to store goods there
             ResourceManagement.InventoryCMS.Instance.RegisterPeasantInAppropriateStorage(this);
+            ResourceManagement.InventoryCMS.Instance.Smiths.Add(this);
         }
 
         protected override void Update()
