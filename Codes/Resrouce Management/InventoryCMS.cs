@@ -251,26 +251,44 @@ namespace ResourceManagement
         }
         public void ReckeckNearestStockpiles()
         {
-            foreach(var lumber in Lumbers)
+           //It ensures that all lumberjacks store the wood in the nearest stockpile
+            for(int i = 0; i < Lumbers.Count; i++)
             {
-                RegisterPeasantInAppropriateStorage(lumber);
-                lumber.ChangeStatusToGoToNewStorage();
+                if (Lumbers[i] == null)
+                {
+                    Lumbers.RemoveAt(i);
+                    continue;
+                }
+                RegisterPeasantInAppropriateStorage(Lumbers[i]);
+                Lumbers[i].ChangeStatusToGoToNewStorage();
             }
         }
         public void RecheckNearestGranaries()
         {
-            foreach(var baker in Bakers)
+            //It ensures that all bakers store the bread in the nearest granary
+            for(int i = 0; i < Bakers.Count; i++)
             {
-                RegisterPeasantInAppropriateStorage(baker);
-                baker.ChangeStatusToGoToNewStorage();
+                if (Bakers[i] == null)
+                {
+                    Bakers.RemoveAt(i);
+                    continue;
+                }
+                RegisterPeasantInAppropriateStorage(Bakers[i]);
+                Bakers[i].ChangeStatusToGoToNewStorage();
             }
         }
         public void RecheckNearestArmories()
         {
-            foreach(var smith in Smiths)
+            //It ensures that all smiths store the weapons in the nearest armory
+            for(int i = 0; i < Smiths.Count; i++)
             {
-                RegisterPeasantInAppropriateStorage(smith);
-                smith.ChangeStatusToGoToNewStorage();
+                if (Smiths[i] == null)
+                {
+                    Smiths.RemoveAt(i);
+                    continue;
+                }
+                RegisterPeasantInAppropriateStorage(Smiths[i]);
+                Smiths[i].ChangeStatusToGoToNewStorage();
             }
         }
     }
